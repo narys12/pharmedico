@@ -1,0 +1,83 @@
+@import "tailwindcss/base";
+
+@import "tailwindcss/components";
+
+@import "tailwindcss/utilities";
+
+.content {
+  @apply px-20
+}
+
+@screen md {
+  .content {
+    @apply px-48;
+  }
+
+  .form-label {
+    @apply text-right mb-0 
+  }
+}
+
+.select {
+  @apply p-2 outline-none text-gray-700
+}
+
+.input {
+  @apply p-2 outline-none text-gray-700
+}
+
+.form-input {
+  @apply bg-gray-200 appearance-none border-2 border-gray-200 rounded py-2 px-4 text-gray-700 leading-tight
+}
+
+.form-input:focus {
+  @apply outline-none bg-white border-purple-500
+}
+
+.form-select {
+  @apply bg-gray-200 border-2 border-gray-200 rounded py-2 px-4 text-gray-700 leading-tight
+}
+
+.form-select:focus {
+  @apply bg-white border-purple-500 outline-none
+}
+
+.form-label {
+  @apply block text-gray-500 font-bold mb-1 pr-4
+}
+
+.btn-outline {
+  @apply p-2 uppercase font-medium border-2 border-green-600 rounded-md text-green-600
+}
+
+.btn-outline:hover {
+  @apply p-2 uppercase font-medium bg-green-600 rounded-md text-white
+}
+
+.btn-green {
+  @apply p-2 uppercase font-medium bg-green-600 text-white
+}
+
+.btn-green:hover {
+  @apply font-bold text-green-600 bg-white transform ease-in-out duration-300
+}
+
+.card {
+  @apply shadow-md
+}
+
+.result-card {
+  @apply mb-4 transition ease-in-out duration-300
+}
+
+.result-card:hover {
+  @apply transform scale-105 
+}
+
+.lien {
+  @apply text-gray-800
+}
+
+.lien:hover {
+  @apply text-green-600
+}
