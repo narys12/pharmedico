@@ -13,7 +13,7 @@
         <div>1 photos</div>
         <div>1 avis</div>
       </div>
-      <button class="card-button">Commander</button>
+      <button class="card-button" @click="chooseOffer(1)">Commander</button>
     </div>
     <div class="card-offer md:space-y-3">
       <svg class="card-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path></svg>
@@ -28,7 +28,7 @@
         <div>3 Photos</div>
         <div>3 Avis</div>
       </div>
-      <button class="card-button">Commander</button>
+      <button class="card-button" @click="chooseOffer(2)">Commander</button>
     </div>
     <div class="card-offer md:space-y-3">
       <svg class="card-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z"></path></svg>
@@ -43,10 +43,69 @@
         <div>Photos illimitées</div>
         <div>Avis illimitées</div>
       </div>
-      <button class="card-button">Commander</button>
+      <button class="card-button" @click="chooseOffer(2)">Commander</button>
     </div>
   </div>
 </template>
+
+<script>
+export default {
+  data() {
+    return {
+      offer: 1,
+      doctor: {},
+      pharmacy: {},
+      client: {}
+    }
+  },
+  methods: {
+    chooseOffer(i) {
+      this.offer = i
+      if (process.browser) {
+        let isDoctor = localStorage.getItem('is_doctor')
+        let isPharmacy = localStorage.getItem('is_pharmacy')
+        alert(isDoctor)
+        if (isDoctor) {
+          saveDoctorData()
+        } else if (isPharmacy) {
+          savePharmacyData()
+        }
+      }
+    },
+    saveDoctorData() {
+      alert(JSON.stringify(this.doctor))
+    },
+    savePharmacyData() {
+
+    },
+    getDoctorFromLocalStorage() {
+      this.doctor.title = localStorage.getItem('title') ? localStorage.getItem('title') : ''
+      this.doctor.name = localStorage.getItem('name') ? localStorage.getItem('name') : ''
+      this.doctor.first_name = localStorage.getItem('first_name') ? localStorage.getItem('first_name') : ''
+      this.doctor.profil = localStorage.getItem('profil') ? localStorage.getItem('profil') : ''
+      this.doctor.onm = localStorage.getItem('onm') ? localStorage.getItem('onm') : ''
+    },
+    getPharmacyFromLocalStorage() {
+      this.pharmacy.name = localStorage.getItem('name') ? localStorage.getItem('name') : ''
+    },
+    getClientFromLocalStorage() {
+      if (process.browser) {
+        this.client.region = localStorage.getItem('region') ? localStorage.getItem('region') : ''
+        this.client.commune = localStorage.getItem('commune') ? localStorage.getItem('commune') : ''
+        this.client.logement = localStorage.getItem('logement') ? localStorage.getItem('logement') : ''
+        this.client.presentation = localStorage.getItem('presentation') ? localStorage.getItem('presentation') : ''
+        this.client.facebook = localStorage.getItem('facebook') ? localStorage.getItem('facebook') : ''
+        this.client.twitter = localStorage.getItem('twitter') ? localStorage.getItem('twitter') : ''
+        this.client.linkedin = localStorage.getItem('linkedin') ? localStorage.getItem('linkedin') : ''
+        this.client.specialities = localStorage.getItem('specialities') ? JSON.parse(localStorage.getItem('specialities')) : []
+        this.client.mails = localStorage.getItem('mails') ? JSON.parse(localStorage.getItem('mails')) : []
+        this.client.phones = localStorage.getItem('phones') ? JSON.parse(localStorage.getItem('phones')) : []
+      }
+    }
+  }
+}
+</script>
+
 
 <style lang="postcss" scoped>
 .card-offer {

@@ -10,7 +10,7 @@
           </label>
         </div>
         <div>
-          <select class="form-select" v-model="title">
+          <select class="form-select" v-model="doctor.title">
             <option value="h">Professeur</option>
             <option value="m">Docteur</option>
           </select>
@@ -23,7 +23,7 @@
           </label>
         </div>
         <div class="md:w-3/4">
-          <input class="form-input w-full" type="text" value="Doe" v-model="name">
+          <input class="form-input w-full" type="text" value="Doe" v-model="doctor.name">
         </div>
       </div>
       <div class="md:flex md:items-center mb-6">
@@ -33,7 +33,7 @@
           </label>
         </div>
         <div class="md:w-3/4">
-          <input class="form-input w-full" type="text" value="Jane" v-model="first_name">
+          <input class="form-input w-full" type="text" value="Jane" v-model="doctor.first_name">
         </div>
       </div>
       <div class="md:flex md:items-center mb-6">
@@ -43,7 +43,7 @@
           </label>
         </div>
         <div class="md:w-3/4 flex">
-          <input class="form-input w-1/2" type="text" value="Jane Doe" v-model="profil">
+          <input class="form-input w-1/2" type="text" value="Jane Doe" v-model="client.profil">
           <button class="btn-green flex">
             <svg class="w-6 h-6 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"></path></svg>
             Choisir un fichier
@@ -57,7 +57,7 @@
           </label>
         </div>
         <div class="md:w-3/4">
-          <input class="form-input w-full" type="number" value="Jane Doe" v-model="onm">
+          <input class="form-input w-full" type="number" value="Jane Doe" v-model="doctor.onm">
         </div>
       </div>
       <div class="md:flex mb-6">
@@ -69,13 +69,13 @@
         <div class="md:w-3/4">
           <div class="flex">
             <input class="form-input w-1/2" type="text" value="Jane Doe" v-model="speciality">
-            <button class="btn-green flex" @click="addSpeciality">
+            <button class="btn-green flex" @click="moreSpeciality">
               <svg class="w-6 h-6 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path></svg>
               Ajouter
             </button>
           </div>
           <div class="w-auto">
-            <Chips v-for="speciality in specialities" :key="speciality" :content="speciality" class="mr-1" />
+            <Chips v-for="speciality in doctor.specialities" :key="speciality" :content="speciality" class="mr-1" />
           </div>
         </div>
       </div>
@@ -88,13 +88,13 @@
           </div>
           <div class="md:w-3/4">
             <div class="md:w-3/4 mb-1">
-              <input class="form-input w-full" type="text" placeholder="Région" v-model="region">
+              <input class="form-input w-full" type="text" placeholder="Région" v-model="client.region">
             </div>
             <div class="md:w-3/4 mb-1">
-              <input class="form-input w-full" type="text" placeholder="Commune" v-model="commune">
+              <input class="form-input w-full" type="text" placeholder="Commune" v-model="client.commune">
             </div>
             <div class="md:w-3/4 mb-1">
-              <input class="form-input w-full" type="text" placeholder="Logement" v-model="logement">
+              <input class="form-input w-full" type="text" placeholder="Logement" v-model="client.logement">
             </div>
             <div class="md:w-3/4 flex items-center">
               <input class="form-input w-full" type="text" placeholder="Coordonnées géographiques">
@@ -112,13 +112,13 @@
         <div class="md:w-3/4">
           <div class="flex">
             <input class="form-input w-1/2" type="text" value="Jane Doe" v-model="mail">
-            <button class="btn-green flex" @click="addMail">
+            <button class="btn-green flex" @click="moreMail">
               <svg class="w-6 h-6 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path></svg>
               Ajouter
             </button>
           </div>
           <div class="w-auto">
-            <Chips v-for="mail in mails" :key="mail" v-bind:content="mail" class="mr-1"/>
+            <Chips v-for="mail in client.mails" :key="mail" v-bind:content="mail" class="mr-1"/>
           </div>
         </div>
       </div>
@@ -131,19 +131,19 @@
         <div class="md:w-3/4">
           <div class="flex">
             <input class="form-input w-1/2" type="text" value="Jane Doe" v-model="phone">
-            <button class="btn-green flex" @click="addPhone">
+            <button class="btn-green flex" @click="morePhone">
               <svg class="w-6 h-6 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path></svg>
               Ajouter
             </button>
           </div>
           <div class="w-auto">
-            <Chips v-for="phone in phones" :key="phone" v-bind:content="phone" class="mr-1"/>
+            <Chips v-for="phone in client.phones" :key="phone" v-bind:content="phone" class="mr-1"/>
           </div>
         </div>
       </div>
       <div class="md:flex mb-2">
         <div class="md:w-1/6 mt-2">
-          <label class="form-label" for="inline-full-name" v-html="presentation">
+          <label class="form-label" for="inline-full-name" v-html="client.presentation">
             Présentation
           </label>
         </div>
@@ -195,7 +195,7 @@
           </label>
         </div>
         <div class="md:w-3/4">
-          <input class="form-input w-full" type="text" value="Jane Doe" v-model="facebook">
+          <input class="form-input w-full" type="text" value="Jane Doe" v-model="client.facebook">
         </div>
       </div>
       <div class="md:flex md:items-center mb-6">
@@ -205,7 +205,7 @@
           </label>
         </div>
         <div class="md:w-3/4">
-          <input class="form-input w-full" type="text" value="Jane Doe" v-model="twitter">
+          <input class="form-input w-full" type="text" value="Jane Doe" v-model="client.twitter">
         </div>
       </div>
       <div class="md:flex md:items-center mb-2">
@@ -215,13 +215,13 @@
           </label>
         </div>
         <div class="md:w-3/4">
-          <input class="form-input w-full" type="text" value="Jane Doe" v-model="linkedin">
+          <input class="form-input w-full" type="text" value="Jane Doe" v-model="client.linkedin">
         </div>
       </div>
     </div>
     <div class="w-full my-4 flex">
-      <nuxt-link to="/inscription/offre" class="mx-auto">
-        <button class="btn-green rounded-md flex space-x-1">
+      <nuxt-link to="/inscription/offre" class="mx-auto" @click.native="storeData">
+        <button class="btn-green rounded-md flex space-x-1" @click.native="storeData">
           <span>Suivant</span>
           <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 5l7 7-7 7M5 5l7 7-7 7"></path></svg>
         </button>
@@ -234,6 +234,8 @@
 import Editor from '@tinymce/tinymce-vue'
 import VueTailwindModal from 'vue-tailwind-modal'
 
+import { mapState, mapMutations, mapGetters} from 'vuex'
+
 export default {
   components: {
     'editor': Editor, 
@@ -242,25 +244,18 @@ export default {
   data() {
     return {
       showModal: false,
-      title: '',
-      name: '',
-      first_name: '',
-      profil: '', 
-      onm: '',
       speciality: '',
-      specialities: [],
-      region: '',
-      commune: '',
-      logement: '',
       mail: '',
-      mails: [],
       phone: '',
-      phones: [],
-      presentation: '',
-      facebook: '',
-      twitter: '',
-      linkedin: ''
     }
+  },
+  computed: {
+    ...mapState('doctor', {
+      doctor: state => state
+    }),
+    ...mapState('client', {
+      client: state => state
+    }),
   },
   methods: {
     goTo(path) {
@@ -268,55 +263,36 @@ export default {
         path: path
       })
     },
-    addPhone() {
+    morePhone() {
       if (this.phone)
-        this.phones.push(this.phone)
+        this.addClientPhone(this.phone)
     },
-    addMail() {
+    moreMail() {
       if (this.mail)
-        this.mails.push(this.mail)
+        this.addClientMail(this.mail)
     },
-    addSpeciality() {
+    moreSpeciality() {
       if (this.speciality)
-        this.specialities.push(this.speciality)
+        this.addSpeciality(this.speciality)
     },
+    ...mapMutations({
+      modifyDoctor: 'doctor/modifyData',
+      addSpeciality: 'doctor/addSpeciality',
+      modifyClient: 'client/modifyData',
+      addClientPhone: 'client/addPhone',
+      addClientMail: 'client/addMail',
+    }),
+    ...mapGetters({
+      getDoctor: 'doctor/getData',
+      getClient: 'client/getData',
+    }),
     storeData() {
-      if (process.browser) {
-        localStorage.setItem('title', this.title)
-        localStorage.setItem('name', this.name)
-        localStorage.setItem('first_name', this.first_name)
-        localStorage.setItem('profil', this.profil)
-        localStorage.setItem('onm', this.onm)
-        localStorage.setItem('region', this.region)
-        localStorage.setItem('commune', this.commune)
-        localStorage.setItem('logement', this.logement)
-        localStorage.setItem('presentation', this.presentation)
-        localStorage.setItem('facebook', this.facebook)
-        localStorage.setItem('twitter', this.twitter)
-        localStorage.setItem('linkedin', this.linkedin)
-        localStorage.setItem('specialities', JSON.stringify(this.specialities))
-        localStorage.setItem('mails', JSON.stringify(this.mails))
-        localStorage.setItem('phones', JSON.stringify(this.phones))
-      }
+      this.modifyDoctor(this.doctor)
+      this.modifyClient(this.client)
     },
     fillForm() {
-      if (process.browser) {
-        this.title = localStorage.getItem('title') ? localStorage.getItem('title') : ''
-        this.name = localStorage.getItem('name') ? localStorage.getItem('name') : ''
-        this.first_name = localStorage.getItem('first_name') ? localStorage.getItem('first_name') : ''
-        this.profil = localStorage.getItem('profil') ? localStorage.getItem('profil') : ''
-        this.onm = localStorage.getItem('onm') ? localStorage.getItem('onm') : ''
-        this.region = localStorage.getItem('region') ? localStorage.getItem('region') : ''
-        this.commune = localStorage.getItem('commune') ? localStorage.getItem('commune') : ''
-        this.logement = localStorage.getItem('logement') ? localStorage.getItem('logement') : ''
-        this.presentation = localStorage.getItem('presentation') ? localStorage.getItem('presentation') : ''
-        this.facebook = localStorage.getItem('facebook') ? localStorage.getItem('facebook') : ''
-        this.twitter = localStorage.getItem('twitter') ? localStorage.getItem('twitter') : ''
-        this.linkedin = localStorage.getItem('linkedin') ? localStorage.getItem('linkedin') : ''
-        this.specialities = localStorage.getItem('specialities') ? JSON.parse(localStorage.getItem('specialities')) : []
-        this.mails = localStorage.getItem('mails') ? JSON.parse(localStorage.getItem('mails')) : []
-        this.phones = localStorage.getItem('phones') ? JSON.parse(localStorage.getItem('phones')) : []
-      }
+      Object.assign(this.doctor, this.getDoctor())
+      Object.assign(this.client, this.getClient())
     }
   },
   mounted() {
